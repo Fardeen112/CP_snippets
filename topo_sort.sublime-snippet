@@ -1,0 +1,20 @@
+<snippet>
+	<content><![CDATA[
+void topo_sort(vector<vector<int>> &adj,stack<int> &st,vector<int> &vis,int node)
+{
+    vis[node]=1;
+    for(auto it: adj[node])
+    {
+        if(!vis[it])
+        {
+            topo_sort(adj,st,vis,it);
+        }
+    }
+    st.push(node);
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>topo_sort</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c++</scope>
+</snippet>

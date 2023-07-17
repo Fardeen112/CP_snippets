@@ -1,0 +1,125 @@
+<snippet>
+	<content><![CDATA[
+struct Node
+{
+    Node*link [26];
+    // vector<Node> link(26);
+    bool flag=false;
+    int count_word=0;
+    int count_pref=0;
+    bool containKey(char ch)
+    {
+        return link[(ch-'a')]!=NULL;
+    }
+    void put(Node* node,char ch)
+    {
+        link[(ch-'a')]=node;
+    }
+    Node* next(char ch)
+    {
+        return link[(ch-'a')];
+    }
+    void setend()
+    {
+        flag=true;
+    }
+    bool is_flag()
+    {
+        return flag;
+    }
+};
+class Trie
+{
+private: 
+    Node* root;
+public:
+    Trie()
+    {
+        root=new Node();
+    }
+    // O(word.length())
+    void insert(string &word)
+    {
+        Node *curr=root;
+        for(int i=0;i<word.length();i++)
+        {
+            if(!curr->containKey(word[i]))
+            {
+                curr->put(new Node(),word[i]);
+            }
+            curr=curr->next(word[i]);
+            curr->count_pref++;
+        }
+        curr->setend();
+        curr->count_word++;
+    }
+    bool search(string &word)
+    {
+        Node *curr=root;
+        for(int i=0;i<word.length();i++)
+        {
+            if(!curr->containKey(word[i]))
+                return false;
+            curr=curr->next(word[i]);
+        }
+        return curr->flag;
+    }
+    bool startswith(string &pref)
+    {
+
+        Node *curr=root;
+        for(int i=0;i<pref.length();i++)
+        {
+            if(!curr->containKey(pref[i]))
+                return false;
+            curr=curr->next(pref[i]);
+        }
+        return true;  
+    }
+    int count_word_occ(string &word)
+    {
+        Node *curr=root;
+        for(int i=0;i<word.length();i++)
+        {
+            if(curr->containKey(word[i]))
+            {
+                curr=curr->next(word[i]);
+            }
+            else
+            return 0;
+        }
+        return curr->count_word;
+    }
+    int count_pref_occ(string &pref)
+    {
+        Node *curr=root;
+        for(int i=0;i<pref.length();i++)
+        {
+            if(curr->containKey(pref[i]))
+            {
+                curr=curr->next(pref[i]);
+            }
+            else
+            return 0;
+        }
+        return curr->count_pref;   
+    }
+    void erase(string &word)
+    {
+        Node *curr=root;
+        if(!search(word))
+        return;
+        for(int i=0;i<word.length();i++)
+        {
+            curr=curr->next(word[i]);
+            curr->count_pref--;
+        }
+        curr->count_word--;
+    }
+};
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>Trie_ds</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c++</scope>
+</snippet>

@@ -1,0 +1,27 @@
+<snippet>
+	<content><![CDATA[
+bool directed_cycle(vector<int> &vis,vector<int> &dfsvis,vector<vector<int>> &adj,int node)
+{
+    vis[node]=1;
+    dfsvis[node]=1;
+    for(auto it: adj[node])
+    {
+        if(!vis[it])
+        {
+            if(directed_cycle(vis,dfsvis,adj,it))
+            {
+                return true;
+            }
+        }
+        else if(dfsvis[it])
+        return true;
+    }
+    dfsvis[node]=0;
+    return false;
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>directed_cycle</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c++</scope>
+</snippet>

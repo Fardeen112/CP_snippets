@@ -1,0 +1,36 @@
+<snippet>
+	<content><![CDATA[
+int N=1e5+10;
+ll PRIME=1e9+7;
+vector<ll> fact;
+vector<ll> inv_fact;
+void calc()
+{
+    fact.resize(N);
+    inv_fact.resize(N);
+    ll p=PRIME;
+    fact[0]=1;
+    int i;
+    for (i = 1; i < N; i++)
+    {
+        fact[i]=i*fact[i-1]%p;
+    }
+    i--;
+    inv_fact[i]=binpow(fact[i],mod-2);
+    for (i--; i >=0; i--)
+    {
+        inv_fact[i]=inv_fact[i+1]* (i+1)%p;
+    }
+}
+ll ncr (ll n,ll r)
+{
+    if(r>n || n<0 || r<0)
+    return 0;
+    return  fact[n]*inv_fact[r]%PRIME *inv_fact[n-r]%PRIME;
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>ncr</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c++</scope>
+</snippet>

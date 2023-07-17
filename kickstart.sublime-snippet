@@ -1,0 +1,120 @@
+<snippet>
+	<content><![CDATA[
+    #include<bits/stdc++.h>
+#include<ext/pb_ds/assoc_container.hpp>
+#include<ext/pb_ds/tree_policy.hpp>
+
+using namespace std;
+using namespace __gnu_pbds;
+
+#define int long long
+#define pb push_back
+#define endl "\n"
+#define bn begin()
+#define en end()
+#define ppb pop_back
+#define ff first
+#define ss second
+#define pii pair<int,int>
+#define loop(i,a,b) for(int i=a;i<b;i++)
+#define bs binary_search
+const int inf= 1e18,mod=1e9+7;
+
+#define add_mod(a,b) (a%mod + b%mod)%mod
+#define mul_mod(a,b) (a%mod * b%mod)%mod
+#define sub_mod(a,b) (mod + a%mod - b%mod)%mod
+typedef tree<int/*data type*/, null_type, less/*comparator the way we want to campare*/<int>, rb_tree_tag, tree_order_statistics_node_update> pbds; // find_by_order(return the pointer) use * to get the value, order_of_key
+#define compar bool compare(int a,int b){return a>b;}
+#define fast ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
+#ifndef ONLINE_JUDGE
+    #define file  freopen("Error.txt", "w", stderr);freopen("input.txt", "r", stdin ); freopen("output.txt", "w", stdout);
+#else
+    #define file
+#endif
+#define per(x) fixed<<setprecision(x)<<  // syntax:-cout<<per(jitni decimal place chahiyaen)variable name;
+//bool compare(pair<int,int> a,pair<int,int> b){if(a.first==b.first)return a.second<b.second;return a.first<b.first;}
+//if an element have a divisor i less than sqrt(n) the it will definately have n/i as a divisor
+// (a/b) %m = a%m *binpow(b,m-2) provided b and m are co-prime.
+// negative number ka mod tackle karne ke liyaen uss number me mod jod kar mod kar lo
+int binpow(int a, int b) {
+    int res = 1LL;
+    while (b > 0) {
+        if (b & 1)
+            res = (res%mod * a%mod)%mod;
+        a = (a%mod * a%mod)%mod;
+        b >>= 1;
+    }
+    return res;
+}
+int modinv(int a, int m)
+{
+    int m0 = m;
+    int y = 0LL, x = 1LL;
+    if (m == 1LL)
+        return 0LL;
+    while (a > 1LL) {
+        int q = a / m;
+        int t = m;
+        m = a % m, a = t;
+        t = y;
+        y = x - q * y;
+        x = t;
+    }
+    if (x < 0LL)
+        x += m0;
+ 
+    return x;
+}
+
+void printDivisors(int n,vector<int> &v)
+{
+    // vector<int> v;
+    // Note that this loop runs till square root
+    for (int i=1; i<=sqrt(n); i++)
+    {
+        if (n%i == 0)
+        {
+            // If divisors are equal, print only one
+            if (n/i == i)
+                v.pb(i);
+  
+            else // Otherwise print both
+                v.pb(i); v.pb(n/i);
+        }
+    }
+}
+// vector<int> x={1,0,0,-1};
+// vector<int> y={0,1,-1,0};
+// vector<char> path={'D','R','L','U'};
+// vector<int> x={0,0,1,-1,1,1,-1,-1};
+// vector<int> y={1,-1,0,0,1,-1,1,-1};
+// #define ll long long
+
+void fun()
+{
+    
+}
+
+
+signed main()
+{
+fast
+//!!!!!!!!!!!!!!!!!!!!!!! remove file !!!!!!!!!!!!!!!!!!!!!!
+file
+int t;
+cin>>t;
+
+int k=1;
+while(k<=t){
+cout<<"Case #"<<k<<": ";
+fun();
+k++;
+}
+return 0;
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>kickstart</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c++</scope>
+</snippet>

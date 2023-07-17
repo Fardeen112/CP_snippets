@@ -1,0 +1,55 @@
+<snippet>
+	<content><![CDATA[
+vector<int> par;
+vector<int> ranks;
+int find_par(int node)
+{
+    if(par[node]==node)
+    return node;
+    return par[node]=find_par(par[node]);
+}
+
+void make_union(int u, int v)
+{
+    int par_u=find_par(u);
+    int par_v=find_par(v);
+    if(par_u!=par_v)
+    {
+        if (ranks[par_u] < ranks[par_v])
+        swap(par_u, par_v);
+        par[par_u] = par_v;
+        if (ranks[par_u] == ranks[par_v])
+            ranks[par_u]++;
+    }
+}
+//<!-- union by size in case we want to know size of a connected componet -->
+void make_union(int u, int v)
+// {
+//     int par_u=find_par(u);
+//     int par_v=find_par(v);
+//     if(par_u!=par_v)
+//     {
+//         if(sz[par_u]<sz[par_v])
+//         {
+//             swap(par_u,par_v);
+//         }
+//         par[par_v]=par_u;
+//         sz[par_u]+=sz[par_v];
+//     }
+// }
+void dsu(int n)
+{
+    par.resize(n+1);
+    ranks.resize(n+1);
+    for(int i=0;i<n+1;i++)
+    {
+        par[i]=i;
+        ranks[i]=0;
+    }
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>dsu</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c++</scope>
+</snippet>

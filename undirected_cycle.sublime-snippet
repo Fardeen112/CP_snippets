@@ -1,0 +1,25 @@
+<snippet>
+	<content><![CDATA[
+bool undirected_cycle(int node,vector<vector<int>> &adj,vector<int> &vis,int par)
+{
+    vis[node]=1;
+    for(auto it: adj[node])
+    {
+        if(!vis[it])
+        {
+            if(undirected_cycle(it,adj,vis,node))
+            return true;
+        }
+        else if(it!=par)
+        {
+            return true;
+        }
+    }
+    return false;
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>undirected_cycle</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c++</scope>
+</snippet>
